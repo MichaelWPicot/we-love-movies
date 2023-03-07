@@ -13,7 +13,6 @@ app.use(express.json());
 app.use("/movies", moviesRouter);
 app.use("/theaters", theatersRouter);
 app.use("/reviews", reviewsRouter);
-console.log("app use")
 // Not Found Handler
 app.use((req, res, next) => {
   next({ status: 404, message: `Not found: ${req.originalUrl}` });
@@ -25,5 +24,4 @@ app.use((error, req, res, next) => {
   res.status(status).json({ error: message });
 });
 
-console.log("end")
 module.exports = app;
