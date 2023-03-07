@@ -1,15 +1,10 @@
+const path = require("path");
+
 require("dotenv").config();
 
 const {
-  NODE_ENV = "development",
-  DEVELOPMENT_DATABASE_URL,
-  PRODUCTION_DATABASE_URL,
+  DATABASE_URL = "postgresql://postgres@localhost/postgres",
 } = process.env;
-const DATABASE_URL =
-  NODE_ENV === "production"
-    ? PRODUCTION_DATABASE_URL
-    : DEVELOPMENT_DATABASE_URL;
-
 
 module.exports = {
   development: {
@@ -17,10 +12,10 @@ module.exports = {
     connection: DATABASE_URL,
     pool: { min: 0, max: 5 },
     migrations: {
-      directory:  __dirname + "/src/db/migrations",
+      directory: path.join(__dirname, "src", "db", "migrations"),
     },
     seeds: {
-      directory: __dirname + "/src/db/seeds",
+      directory: path.join(__dirname, "src", "db", "seeds"),
     },
   },
 
@@ -29,10 +24,10 @@ module.exports = {
     connection: DATABASE_URL,
     pool: { min: 0, max: 5 },
     migrations: {
-      directory:  __dirname + "/src/db/migrations",
+      directory: path.join(__dirname, "src", "db", "migrations"),
     },
     seeds: {
-      directory: __dirname + "/src/db/seeds",
+      directory: path.join(__dirname, "src", "db", "seeds"),
     },
   },
 
@@ -42,10 +37,10 @@ module.exports = {
       filename: ":memory:",
     },
     migrations: {
-      directory:  __dirname + "/src/db/migrations",
+      directory: path.join(__dirname, "src", "db", "migrations"),
     },
     seeds: {
-      directory: __dirname + "/src/db/seeds",
+      directory: path.join(__dirname, "src", "db", "seeds"),
     },
     useNullAsDefault: true,
   },
